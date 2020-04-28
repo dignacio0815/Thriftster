@@ -1,0 +1,20 @@
+{
+  "name": "environment",
+  "version": "1.0.0",
+  "description": "Final Project for CST 336",
+  "main": "index.js"
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dignacio0815/Thriftster.git"
+  },
+  "author": "Denize Ignacio & Julio Aguirre",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dignacio0815/Thriftster/issues"
+  },
+  "homepage": "https://github.com/dignacio0815/Thriftster#readme"
+}
