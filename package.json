@@ -2,7 +2,7 @@
   "name": "environment",
   "version": "1.0.0",
   "description": "Final Project for CST 336",
-  "main": "index.js"
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js"
@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/dignacio0815/Thriftster/issues"
   },
-  "homepage": "https://github.com/dignacio0815/Thriftster#readme"
+  "homepage": "https://github.com/dignacio0815/Thriftster#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
