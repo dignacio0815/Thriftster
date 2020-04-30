@@ -12,6 +12,14 @@ app.get("/", function(req, res) {
    res.render("home"); 
 });
 
+app.get("/signIn",function(req,res){
+    res.render("signIn");
+});
+
+app.get("/register",function(req, res) {
+   res.render("register"); 
+});
+
 app.get("*", function(req,res){
    res.render("error"); 
 });

@@ -1,5 +1,5 @@
 <%- include('templates/header') -%>
-        <div class="homeContainer">
+        <div class="signContainer">
             <nav class="navbar navbar-light bg-light justify-content-between">
               <a class="navbar-brand" href="/">
                   <img src="csumblogo.jpg" style ="float:left" width="50" height="50" class="d-inline-block align-top" alt="">
@@ -8,9 +8,26 @@
               <form class="form-inline">
                 <input id="searchBar" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" style="margin:5px;" type="submit">Search</button>
-                <a href="/signIn"><button id="btnSignIn" style="margin:5px;" type="button" class="btn btn-outline-info">Sign In</button></a>
                  <a href="/register"><button id="btnRegister" style="margin:5px;" type="button" class="btn btn-outline-info">Register</button></a>
               </form>
             </nav>
+        </div>
+        <h2 id="LoginLabel">Sign-In</h2>
+        <div class="SignInForm">
+             <form action="/signIn" method="post">
+              <div class="imgcontainer">
+                <img src="img_avatar2.png" alt="Avatar" class="avatar">
+              </div>
+            
+              <div class="container">
+                <label for="uname"><b>Username</b></label>
+                <input type="text" placeholder="Enter Username" name="uname" required>
+            
+                <label for="psw"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="psw" required>
+            
+                <button id="btn" type="submit">Login</button>
+              </div>
+            </form> 
         </div>
 <%- include('templates/footer') -%>
