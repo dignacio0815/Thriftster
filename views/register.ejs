@@ -1,0 +1,35 @@
+<%- include('templates/header') -%>
+        <div class="registerContainer">
+            <nav class="navbar navbar-light bg-light justify-content-between">
+              <a class="navbar-brand" href="/">
+                  <img src="csumblogo.jpg" style ="float:left" width="50" height="50" class="d-inline-block align-top" alt="">
+                  <h2 id="name">Thrifster</h2>
+              </a>
+              <form class="form-inline">
+                <input id="searchBar" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" style="margin:5px;" type="submit">Search</button>
+                <a href="/signIn"><button id="btnSignIn" style="margin:5px;" type="button" class="btn btn-outline-info">Sign In</button></a>
+              </form>
+            </nav>
+        </div>
+         <form action="/register">
+          <div class="registerForm container">
+            <h2 id="registerLabel">Register</h2>
+            
+            <label for="name"><b>Name</b></label>
+            <input type="text" placeholder="Enter Full Name" name="name" required>
+        
+            <label for="email"><b>Email</b></label>
+            <input type="text" placeholder="Enter Email" name="email" required>
+        
+            <label for="psw"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="psw" required>
+        
+            <label for="psw-repeat"><b>Repeat Password</b></label>
+            <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
+        
+            <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
+            <button type="submit" class="registerbtn">Register</button>
+          </div>
+        </form> 
+<%- include('templates/footer') -%>
