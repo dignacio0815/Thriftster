@@ -91,7 +91,6 @@ app.get("/register",function(req, res) {
    res.render("register"); 
 });
 
-<<<<<<< Updated upstream
 app.post("/register", function(req, res) {
     let username = req.body.username;
     let password = req.body.psw;
@@ -118,12 +117,10 @@ app.get("/logout", function(req, res) {
     res.redirect('/');
 })
 
-=======
 app.get("/profile",function(req, res) {
     res.render("profile")
 });
 
->>>>>>> Stashed changes
 app.get("*", function(req,res){
    res.render("error"); 
 });
