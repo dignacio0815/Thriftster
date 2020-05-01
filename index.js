@@ -17,9 +17,9 @@ app.set("view engine", "ejs");
 
 var connection = mysql.createConnection({
     host: "localhost",
-    user: "julio",
-    password: "julio",
-    database: "thrifster_db"
+    user: "denize",
+    password: "denize",
+    database: "thriftster_db"
 }); 
 
 connection.connect(function(err) {              
@@ -117,9 +117,19 @@ app.get("/logout", function(req, res) {
     res.redirect('/');
 });
 
-app.get("/profile",function(req, res) {
+app.get("/profile", isAuthenticated,function(req, res) {
     res.render("profile");
 });
+
+app.get("/search", isAuthenticated, function(req, res) {
+    console.log(req.query.search)
+    res.render("search");
+}); // route for searching item
+
+app.get("/search/:itemId", isAuthenticated, function(req, res) {
+    // set up route for choosing items to buy
+    
+}); // route for selecting an item
 
 app.get("*", function(req,res){
    res.render("error"); 
