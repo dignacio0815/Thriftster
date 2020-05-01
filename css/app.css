@@ -6,6 +6,10 @@
     color:red;
 }
 
+.bg-dark{
+  background-color:#3A3046 !important;
+}
+
 #searchBar{
   width:1300px;
 }

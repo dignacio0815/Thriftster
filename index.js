@@ -17,13 +17,13 @@ app.set("view engine", "ejs");
 
 var connection = mysql.createConnection({
     host: "localhost",
-    user: "denize",
-    password: "denize",
-    database: "thriftster_db"
+    user: "julio",
+    password: "julio",
+    database: "thrifster_db"
 }); 
 
 connection.connect(function(err) {              
-    if(err) {                                     
+    if(err) {                                   
         console.log('error when connecting to db:', err);
     }                                     
 });   
@@ -115,10 +115,10 @@ app.post("/register", function(req, res) {
 app.get("/logout", function(req, res) {
     req.session.destroy();
     res.redirect('/');
-})
+});
 
 app.get("/profile",function(req, res) {
-    res.render("profile")
+    res.render("profile");
 });
 
 app.get("*", function(req,res){
