@@ -5,9 +5,6 @@ var bcrypt = require("bcrypt");
 var mysql = require("mysql");
 var session = require("express-session");
 var app = express();
-var fs = require("fs");
-var path = require("path");
-var multer = require("multer");
 
 // Yelp API
 const yelp = require('yelp-fusion');
@@ -55,18 +52,6 @@ connection.connect(function(err) {
     }                                     
 });   
 
-//Middlewate for Upload Data
-// Save to the local machine
-let storage = multer.diskStorage({
-    destination: function(req, file, callback){
-        callback(null, path.join(__dirname, 'public/file/'));
-    },
-    filename: function(req, file, callback){
-        callback(null, file.filedname + '-' + Date.now());
-    }
-});
-let upload = multer({storage: storage});
-
 // Middleware
 // check username with /signIn route
 function checkUsername(username) {
@@ -100,57 +85,6 @@ app.get("/", function(req, res) {
    res.render("home"); 
 });
 
-app.get("/upload", function(req, res) {
-    res.render("upload");
-});
-
-app.post("/upload", upload.single('filename'), function(req, res) {
-    console.log("File uploaded locally at", req.file.path);
-    var filename = req.file.path.split('/').pop();
-    var content = fs.readFileSync(req.file.path);
-    var data = new Buffer(content);
-    var stmt = 'INSERT INTO POSTS (itemName, data) VALUES (?,?);';
-    connection.query(stmt, [filename, data], function(error, results) {
-        if(error)throw error;
-        res.redirect("/profile");
-    });
-});
-
-app.get("/profile", isAuthenticated,function(req, res) {
-    console.log(req);
-    var stmt = 'SELECT * FROM POSTS;';
-    connection.query(stmt, function(error, POSTS){
-       if(error)throw error;
-        if(POSTS.length){
-           let file = POSTS[0];
-           let data = new Buffer(file.data, 'binary');
-           console.log(req.query);
-           console.log(req.session.user);
-           res.render('profile', {data:data.toString('base64')});
-       }
-    });
-});
-
-app.get("/search", isAuthenticated, function(req, res) {
-    res.render("search");
-    // res.render("search");
-}); // route for searching item
-
-app.get("/search/:itemName", isAuthenticated, function(req, res) {
-    // set up route for choosing items to buy
-    let stmt = 'SELECT * FROM POSTS WHERE itemName=?';
-    connection.query(stmt, [req.params.search], function(error, results) {
-        console.log(req.params.id);
-       if(error)throw error;
-       if(results.length){
-           let file = results[0];
-           let data = new Buffer(file.data, 'binary');
-           console.log(file);
-           res.render('search', {data:data.toString('base64')});
-       }
-    });
-}); // route for selecting an item
-
 app.get("/signIn", function(req,res){
     res.render("signIn");
 });
@@ -169,7 +103,7 @@ app.post("/signIn", async function(req, res) {
         // TODO -- current route "/" is not meant to be here but is a placeholder
         res.redirect("/welcome");
     } else {
-        res.render("signIn", {error : true});
+        res.render("signIn", {error : true})
     }
 });
 
@@ -207,6 +141,19 @@ app.get("/logout", function(req, res) {
     res.redirect('/');
 });
 
+app.get("/profile", isAuthenticated,function(req, res) {
+    res.render("profile");
+});
+
+app.get("/search", isAuthenticated, function(req, res) {
+    console.log(req.query.search)
+    res.render("search");
+}); // route for searching item
+
+app.get("/search/:itemId", isAuthenticated, function(req, res) {
+    // set up route for choosing items to buy
+    
+}); // route for selecting an item
 
 app.get("*", function(req,res){
    res.render("error"); 
