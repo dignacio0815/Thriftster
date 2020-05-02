@@ -9,7 +9,7 @@ START TRANSACTION;
 DROP TABLE IF EXISTS USERS;
 
 CREATE TABLE USERS (
-  ID INT NOT NULL,
+  ID INT NOT NULL PRIMARY KEY,
   name varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   username varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   password varchar(72) COLLATE utf8_unicode_ci NOT NULL

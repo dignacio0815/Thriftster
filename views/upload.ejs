@@ -17,35 +17,36 @@
                     <form action="/profile">
                         <button class="dropdown-item" type="submit">Profile</button>
                     </form>
-                    <form action="/upload">
-                        <button class="dropdown-item" type="submit">Upload</button>
-                    </form>
                     <form action="/logout">
                         <button class="dropdown-item" type="submit">Log Out</button>
                     </form>
                   </div>
                 </div>
             </nav>
-            
-            <!--CENTER this later-->
-            <div class="jumbotron">
-              <h4 style="text-align:center;">Search some local thrift stores or use search bar to search for items from other users!</h4>
-              <div class="flex-container">
-                <% thriftStores.forEach(function(t) { %> 
-                  <div class="img-thumbnail flex-item">
-                    <img src=<%=t.image_url %> >
-                    <h4> <%= t.name%> </h4>
-                    <h5> Phone Number: <%= t.phone %> </h5>
-                    <h6> <%= t.location.address1 %>, <%= t.location.city %> <%= t.location.state %></h6>
-                    <h4> Rating: <%= t.rating%>/5 </h4>
-                    <a href=<%=t.url%>> Find more here! </a>
-                  </div>
-                <% }) %>
-                  
-              </div>  
-            </div>
-            
-
         </div>
-        
+        <h5 style="text-align:center">Upload Item</h5>
+        <form  class='container' action="/upload" method="POST" enctype='multipart/form-data'>
+            <div class="form-group row">
+                <input type='text' placeholder="Item Name" required>
+            </div>
+            <div class="form-group row">
+                <input type='text' placeholder="Description" required>
+            </div>
+            <div class="form-group row">
+                <input type='text' placeholder="Item Cost" required>
+            </div>
+            <div class='form-group row'>
+                <laber for='filename' class='col-sm-4 col-form-label'>Select File</laber>
+                <div class='col-sm-4'>
+                    <input type='file' class='form-control' id='filename' name='filename' accept='image/*' required>
+                </div>
+            </div>
+            <div class='form-group row'>
+                <div class='col-sm-4'></div>
+                <div class='col-sm-4'>
+                    <button class='btn btn-primary btn-block'>Submit</button>
+                </div>
+                <div class='col-sm-4'></div>
+            </div>
+        </form>
 <%- include('templates/footer') -%>
