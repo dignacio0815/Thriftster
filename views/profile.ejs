@@ -16,6 +16,9 @@
                     <form action ="/profile">
                         <button class="dropdown-item" type="submit">Profile</button>
                     </form>
+                    <form action="/upload">
+                        <button class="dropdown-item" type="submit">Upload</button>
+                    </form>
                     <form action="/logout">
                         <button class="dropdown-item" type="submit">Log Out</button>
                     </form>
@@ -28,7 +31,7 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-7 ">
-
+                    <img src='data:image/png;base64, <%=data%> '/>
                     <div class="panel panel-default">
                         <div class="panel-body">
                
