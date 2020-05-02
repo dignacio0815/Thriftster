@@ -27,13 +27,13 @@
         <h5 style="text-align:center">Upload Item</h5>
         <form  class='container' action="/upload" method="POST" enctype='multipart/form-data'>
             <div class="form-group row">
-                <input type='text' placeholder="Item Name" required>
+                <input type='text' placeholder="Item Name" name="itemName" required>
             </div>
             <div class="form-group row">
-                <input type='text' placeholder="Description" required>
+                <input type='text' placeholder="Description" name="itemDescription" required>
             </div>
             <div class="form-group row">
-                <input type='text' placeholder="Item Cost" required>
+                <input type='text' placeholder="Item Cost" name="itemCost" required>
             </div>
             <div class='form-group row'>
                 <laber for='filename' class='col-sm-4 col-form-label'>Select File</laber>

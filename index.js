@@ -160,11 +160,10 @@ app.get("/profile", isAuthenticated,function(req, res) {
     connection.query(stmt, function(error, POSTS){
        if(error)throw error;
         if(POSTS.length){
-           let file = POSTS[0];
-           let data = new Buffer(file.data, 'binary');
            console.log(req.query);
            console.log(req.session.user);
-           res.render('profile', {data:data.toString('base64')});
+           console.log(POSTS);
+           res.render('profile', {data:POSTS});
        }
     });
 });
@@ -178,8 +177,10 @@ app.post("/upload", upload.single('filename'), function(req, res) {
     var filename = req.file.path.split('/').pop();
     var content = fs.readFileSync(req.file.path);
     var data = new Buffer(content);
-    var stmt = 'INSERT INTO POSTS (itemName, data) VALUES (?,?);';
-    connection.query(stmt, [filename, data], function(error, results) {
+    let bin = new Buffer(data, 'binary');
+    let b64 = bin.toString('base64');
+    var stmt = 'INSERT INTO POSTS (itemName, data, cost, description, username, purchaseDate) VALUES (?,?,?,?,?,?);';
+    connection.query(stmt, [req.body.itemName, b64, req.body.itemCost, req.body.itemDescription, req.session.user, Date.now()], function(error, results) {
         if(error)throw error;
         res.redirect("/profile");
     });

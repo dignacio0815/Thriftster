@@ -31,7 +31,8 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-7 ">
-                    <img src='data:image/png;base64, <%=data%> '/>
+                    <%data.forEach(function(d){%>
+                        <img src='data:image/png;base64, <%=d.data%> '/>
                     <div class="panel panel-default">
                         <div class="panel-body">
                
@@ -39,13 +40,22 @@
                                 <div class="clearfix"></div>
                                 <hr style="margin:5px 0 5px 0;">
                                 
-                                <div class="col-sm-5 col-xs-6 tital" id="nameTag" >Name:</div><div class="col-sm-7 col-xs-6 "></div>
+                                <div class="col-sm-5 col-xs-6 tital" id="nameTag" >Name: <%=d.itemName%></div><div class="col-sm-7 col-xs-6 "></div>
+                                <div class="clearfix"></div>
+                                <div class="bot-border"></div>
+                                
+                                <div class="col-sm-5 col-xs-6 tital" id="nameTag" >Description:<%=d.description%></div><div class="col-sm-7 col-xs-6 "></div>
+                                <div class="clearfix"></div>
+                                <div class="bot-border"></div>
+                                
+                                <div class="col-sm-5 col-xs-6 tital" id="nameTag" >Cost: <%=d.cost%></div><div class="col-sm-7 col-xs-6 "></div>
                                 <div class="clearfix"></div>
                                 <div class="bot-border"></div>
                         
                             </div>
                         </div>
                     </div> 
+                    <%});%>
                 </div>
             </div>     
         </div>
