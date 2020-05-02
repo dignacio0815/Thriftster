@@ -4,6 +4,9 @@ var bodyParser = require("body-parser");
 var bcrypt = require("bcrypt");
 var mysql = require("mysql");
 var session = require("express-session");
+var fs = require("fs");
+var path = require("path");
+var multer = require("multer");
 var app = express();
 
 // Yelp API
@@ -24,10 +27,20 @@ const client = yelp.client(apiKey);
             if(t.image_url != '') {
                 thriftStores.push(t);
             }
-        })
+        });
     }).catch(e => {
       console.log(e);
     });
+    
+let storage = multer.diskStorage({
+    destination: function(req, file, callback){
+        callback(null, path.join(__dirname, 'public/file/'));
+    },
+    filename: function(req, file, callback){
+        callback(null, file.filedname + '-' + Date.now());
+    }
+});
+let upload = multer({storage: storage});
 
 app.use(express.static("css"));
 app.use(express.static("img"));
@@ -41,9 +54,9 @@ app.set("view engine", "ejs");
 
 var connection = mysql.createConnection({
     host: "localhost",
-    user: "denize",
-    password: "denize",
-    database: "thriftster_db"
+    user: "julio",
+    password: "julio",
+    database: "thrifster_db"
 }); 
 
 connection.connect(function(err) {              
@@ -103,13 +116,13 @@ app.post("/signIn", async function(req, res) {
         // TODO -- current route "/" is not meant to be here but is a placeholder
         res.redirect("/welcome");
     } else {
-        res.render("signIn", {error : true})
+        res.render("signIn", {error : true});
     }
 });
 
 app.get("/welcome", isAuthenticated, function(req, res) {
     res.render("welcome", {user : req.session.user, thriftStores : thriftStores});
-})
+});
 
 app.get("/register",function(req, res) {
    res.render("register"); 
@@ -119,9 +132,9 @@ app.post("/register", function(req, res) {
     let username = req.body.username;
     let password = req.body.psw;
     let name = req.body.name;
-    console.log(username)
-    console.log(password)
-    console.log(name)
+    console.log(username);
+    console.log(password);
+    console.log(name);
     let salt = 10;
     bcrypt.hash(password, salt, function(error, hash) {
          var stmt = 'INSERT into USERS (username, password, name) VALUES (?, ?, ?)';
@@ -142,18 +155,56 @@ app.get("/logout", function(req, res) {
 });
 
 app.get("/profile", isAuthenticated,function(req, res) {
-    res.render("profile");
+    console.log(req);
+    var stmt = 'SELECT * FROM POSTS;';
+    connection.query(stmt, function(error, POSTS){
+       if(error)throw error;
+        if(POSTS.length){
+           let file = POSTS[0];
+           let data = new Buffer(file.data, 'binary');
+           console.log(req.query);
+           console.log(req.session.user);
+           res.render('profile', {data:data.toString('base64')});
+       }
+    });
+});
+
+app.get("/upload", function(req, res) {
+    res.render("upload");
+});
+
+app.post("/upload", upload.single('filename'), function(req, res) {
+    console.log("File uploaded locally at", req.file.path);
+    var filename = req.file.path.split('/').pop();
+    var content = fs.readFileSync(req.file.path);
+    var data = new Buffer(content);
+    var stmt = 'INSERT INTO POSTS (itemName, data) VALUES (?,?);';
+    connection.query(stmt, [filename, data], function(error, results) {
+        if(error)throw error;
+        res.redirect("/profile");
+    });
+    
 });
 
 app.get("/search", isAuthenticated, function(req, res) {
-    console.log(req.query.search)
     res.render("search");
+    // res.render("search");
 }); // route for searching item
 
-app.get("/search/:itemId", isAuthenticated, function(req, res) {
+app.get("/search/:itemName", isAuthenticated, function(req, res) {
     // set up route for choosing items to buy
-    
-}); // route for selecting an item
+    let stmt = 'SELECT * FROM POSTS WHERE itemName=?';
+    connection.query(stmt, [req.params.search], function(error, results) {
+        console.log(req.params.id);
+       if(error)throw error;
+       if(results.length){
+           let file = results[0];
+           let data = new Buffer(file.data, 'binary');
+           console.log(file);
+           res.render('search', {data:data.toString('base64')});
+       }
+    });
+}); // route for selecting an item // route for selecting an item
 
 app.get("*", function(req,res){
    res.render("error"); 
