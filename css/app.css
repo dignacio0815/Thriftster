@@ -29,7 +29,6 @@ input[type=text], input[type=password] {
 }
 
 #btn {
-  background-color: #4CAF50;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -70,7 +69,6 @@ input[type=text]:focus, input[type=password]:focus {
 }
 
 .registerbtn {
-  background-color: #4CAF50;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -107,4 +105,33 @@ a {
 
 .flex-item > img {
 	width: 100%;
+}
+
+.containerLogin {
+    border: 1px solid;
+    padding: 10px;
+    box-shadow: 5px 10px 10px;
+    width: 50%;
+    border-radius: 25px;
+    margin: 0;
+    background: #f1f1f1;
+    /*background: linear-gradient(to bottom right, red, orange);*/
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
+}
+
+.roundedBorderInput {
+  border-radius: 10px;
+}
+
+.background {
+    background-color: #1b2845;
+  background-image: -webkit-linear-gradient(bottom right, #1b2845 0%, #274060 74%);
+  background-image: -moz-linear-gradient(bottom right, #1b2845 0%, #274060 74%);
+  background-image: -o-linear-gradient(bottom right, #1b2845 0%, #274060 74%);
+  background-image: linear-gradient(to top left, #1b2845 0%, #274060 74%);
+  min-height:100vh;
 }
