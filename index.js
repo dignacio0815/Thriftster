@@ -1,9 +1,33 @@
+require('dotenv').config();
 var express = require("express");
 var bodyParser = require("body-parser");
 var bcrypt = require("bcrypt");
 var mysql = require("mysql");
 var session = require("express-session");
 var app = express();
+
+// Yelp API
+const yelp = require('yelp-fusion');
+const apiKey = process.env.MY_API_KEY;
+const client = yelp.client(apiKey);
+
+    const searchRequest = {
+        term:'Thrift Stores',
+        location: 'Salinas, Ca',
+        limit: '33'
+    };
+    
+    let thriftStores = [];
+    client.search(searchRequest).then(response => {
+        response.jsonBody.businesses.forEach(function(t) {
+            // filter for only thriftstores w/ images
+            if(t.image_url != '') {
+                thriftStores.push(t);
+            }
+        })
+    }).catch(e => {
+      console.log(e);
+    });
 
 app.use(express.static("css"));
 app.use(express.static("img"));
@@ -17,9 +41,9 @@ app.set("view engine", "ejs");
 
 var connection = mysql.createConnection({
     host: "localhost",
-    user: "julio",
-    password: "julio",
-    database: "thrifster_db"
+    user: "denize",
+    password: "denize",
+    database: "thriftster_db"
 }); 
 
 connection.connect(function(err) {              
@@ -84,7 +108,7 @@ app.post("/signIn", async function(req, res) {
 });
 
 app.get("/welcome", isAuthenticated, function(req, res) {
-    res.render("welcome", {user : req.session.user});
+    res.render("welcome", {user : req.session.user, thriftStores : thriftStores});
 })
 
 app.get("/register",function(req, res) {
