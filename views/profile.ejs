@@ -40,7 +40,7 @@
                                 <div class="col-sm-5 col-xs-6 tital" id="nameTag" >Cost: <%=d.cost%></div><div class="col-sm-7 col-xs-6 "></div>
                                 <div style="text-align:center;" class="inline-block">
                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target='#exampleModal<%=d.orderID%>' >Edit Item Details</button>
-                                    <button type="button" class="btn btn-danger">Remove Item</button>
+                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target='#exampleModall<%=d.orderID%>'>Remove Item</button>
                                 </div>
                             </div>
 
@@ -70,6 +70,28 @@
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <input type="submit" class="btn btn-primary" value="Save Changes">
+                    </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="modal fade" id="exampleModall<%=d.orderID%>" class="modal" tabindex="-1" role="dialog" aria-labelledby="#exampleModalLabel<%=d.orderID%>" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel<%=d.orderID%>">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">  
+                    <form action="/profileItemDeleted" method="POST">
+                        <input type="submit" class="btn btn-primary" value="Are you sure you want to delete?">
+                        <input type="hidden" name="orderID" value=<%= d.orderID %>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>                        
                     </form>
                     </div>
                   </div>

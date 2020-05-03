@@ -178,6 +178,17 @@ app.post("/profileUpdated", isAuthenticated, function(req, res) {
     })
 });
 
+app.post("/profileItemDeleted", isAuthenticated, function(req, res) {
+    var stmt = "DELETE FROM POSTS WHERE orderID=?";
+    var orderID = req.body.orderID;
+    // connection
+    console.log(orderID)
+    connection.query(stmt, [orderID], function(error, result) {
+        if (error) throw error;
+        res.redirect("/profile");
+    });
+});
+
 app.get("/upload", function(req, res) {
     res.render("upload");
 });
