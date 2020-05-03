@@ -30,9 +30,11 @@
             </nav>
         </div>
         <div>
-          <h5>ITEMS: </h5>
+          <h5 style="text-align:center;">ITEMS: </h5>
           <ul>
-            <img src='data:image/png;base64, <%=data%> '/>
+            <% if(typeof data != 'undefined' && data) { %>
+                    <img src='data:image/png;base64, <%=data%> '/>
+            <% } %>
           </ul>
         </div>
 <%- include('templates/footer') -%>
