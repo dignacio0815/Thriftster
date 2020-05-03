@@ -21,7 +21,7 @@ ALTER TABLE USERS
 DROP TABLE IF EXISTS POSTS;
 CREATE TABLE POSTS (
   username varchar(50) COLLATE utf8_unicode_ci NOT NULL, 
-  orderID INT NOT NULL,
+  orderID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   purchaseDate DATE,                                                                                                             
   itemName varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   description varchar(500) COLLATE utf8_unicode_ci NOT NULL,

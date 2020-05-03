@@ -1,25 +1,30 @@
-#name{
-    font-family:Impact, Charcoal, sans-serif;
-}
-.error{
-    text-align:center;
-    color:red;
+#name {
+  font-family: Impact, Charcoal, sans-serif;
 }
 
-.bg-dark{
-  background-color:#3A3046 !important;
+.error {
+  text-align: center;
+  color: red;
 }
 
-#searchBar{
-  width:1300px;
+.bg-dark {
+  background-color: #3A3046 !important;
+}
+
+#searchBar {
+  width: 1300px;
 }
 
 /*Login css*/
-#LoginLabel,#registerLabel, #ProfileLabel{
-    text-align:center;
+
+#LoginLabel,
+#registerLabel,
+#ProfileLabel {
+  text-align: center;
 }
 
-input[type=text], input[type=password] {
+input[type=text],
+input[type=password] {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -56,14 +61,18 @@ button:hover {
 }
 
 /*Register css*/
-* {box-sizing: border-box}
+
+* {
+  box-sizing: border-box
+}
 
 
 .registerForm {
   padding: 16px;
 }
 
-input[type=text]:focus, input[type=password]:focus {
+input[type=text]:focus,
+input[type=password]:focus {
   background-color: #ddd;
   outline: none;
 }
@@ -78,7 +87,7 @@ input[type=text]:focus, input[type=password]:focus {
 }
 
 .registerbtn:hover {
-  opacity:0.8;
+  opacity: 0.8;
 }
 
 a {
@@ -91,36 +100,53 @@ a {
 }
 
 .flex-container {
-	display: flex;
-	flex-wrap: wrap;
-	flex-direction: row;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
 }
 
 .flex-item {
-	width: 30%;
-	height: auto;
-	margin: 10px;
-	border-color:black;
+  width: 30%;
+  height: auto;
+  margin: 10px;
+  border-color: black;
 }
 
-.flex-item > img {
-	width: 100%;
+.flex-item>img {
+  width: 100%;
+}
+
+.flex-item-profile {
+  width: 50%;
+  height: auto;
+  margin: 10px;
+  border-color: black;
+}
+
+.flex-item-profile>img {
+  width: 100%;
+}
+
+.flex-container-profile {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
 }
 
 .containerLogin {
-    border: 1px solid;
-    padding: 10px;
-    box-shadow: 5px 10px 10px;
-    width: 50%;
-    border-radius: 25px;
-    margin: 0;
-    background: #f1f1f1;
-    /*background: linear-gradient(to bottom right, red, orange);*/
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%)
+  border: 1px solid;
+  padding: 10px;
+  box-shadow: 5px 10px 10px;
+  width: 50%;
+  border-radius: 25px;
+  margin: 0;
+  background: #f1f1f1;
+  /*background: linear-gradient(to bottom right, red, orange);*/
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%)
 }
 
 .roundedBorderInput {
@@ -128,10 +154,18 @@ a {
 }
 
 .background {
-    background-color: #1b2845;
+  background-color: #1b2845;
   background-image: -webkit-linear-gradient(bottom right, #1b2845 0%, #274060 74%);
   background-image: -moz-linear-gradient(bottom right, #1b2845 0%, #274060 74%);
   background-image: -o-linear-gradient(bottom right, #1b2845 0%, #274060 74%);
   background-image: linear-gradient(to top left, #1b2845 0%, #274060 74%);
-  min-height:100vh;
+  min-height: 100vh;
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
 }
