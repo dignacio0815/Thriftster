@@ -141,12 +141,11 @@ a {
   border-radius: 25px;
   margin: 0;
   background: #f1f1f1;
-  /*background: linear-gradient(to bottom right, red, orange);*/
   position: absolute;
   top: 50%;
   left: 50%;
   margin-right: -50%;
-  transform: translate(-50%, -50%)
+  transform: translate(-50%, -50%);
 }
 
 .roundedBorderInput {
@@ -168,5 +167,5 @@ a {
   left: 50%;
   transform: translate(-50%, -50%);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
-  min-height:100vh;
+  min-height: 100vh;
 }

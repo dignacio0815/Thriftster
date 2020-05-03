@@ -200,8 +200,8 @@ app.post("/upload", upload.single('filename'), function(req, res) {
     var data = new Buffer(content);
     let bin = new Buffer(data, 'binary');
     let b64 = bin.toString('base64');
-    var stmt = 'INSERT INTO POSTS (itemName, data, cost, description, username, purchaseDate) VALUES (?,?,?,?,?,?);';
-    connection.query(stmt, [req.body.itemName, b64, req.body.itemCost, req.body.itemDescription, req.session.user, Date.now()], function(error, results) {
+    var stmt = 'INSERT INTO POSTS (itemName, data, cost, description, username, purchaseDate) VALUES (?,?,?,?,?, NOW());';
+    connection.query(stmt, [req.body.itemName, b64, req.body.itemCost, req.body.itemDescription, req.session.user], function(error, results) {
         if (error) throw error;
         res.redirect("/profile");
     });
@@ -213,17 +213,19 @@ app.get("/search", isAuthenticated, function(req, res) {
     // res.render("search");
 }); // route for searching item
 
-app.get("/search/:itemName", isAuthenticated, function(req, res) {
+app.get("/searchResults", isAuthenticated, function(req, res) {
     // set up route for choosing items to buy
-    let stmt = 'SELECT * FROM POSTS WHERE itemName=?';
-    connection.query(stmt, [req.params.search], function(error, results) {
-        console.log(req.params.id);
+    // query by item tags
+    console.log(req.query.searchedItem)
+    let stmt = 'SELECT * FROM POSTS WHERE itemName LIKE ? OR description LIKE ? OR purchaseDate <= ?;';
+    connection.query(stmt, ['%' + req.query.searchedItem + '%', '%' + req.query.searchedItem + '%', req.query.searchedItem], function(error, results) {
+        // console.log(req.params.id);
         if (error) throw error;
         if (results.length) {
-            let file = results[0];
-            let data = new Buffer(file.data, 'binary');
-            console.log(file);
-            res.render('search', { data: data.toString('base64') });
+            results.forEach(function(t) {
+                console.log(t.itemName)
+            })
+            res.render("searchResults", { results: results });
         }
     });
 }); // route for selecting an item // route for selecting an item

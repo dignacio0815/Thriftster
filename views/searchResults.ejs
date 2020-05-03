@@ -5,13 +5,11 @@
                   <img src="csumblogo.jpg" style ="float:left" width="50" height="50" class="d-inline-block align-top" alt="">
                   <h2 id="name">Thrifster</h2>
               </a>
-              
-              <form action="/searchResults">
+            <form action="/searchResults">
                 <input name="searchedItem" id="searchBar" class="form-control mr-sm-2" type="text" placeholder="Search either by tags, date, and price!" aria-label="Search" required>
                 <button class='btn btn-outline-success my-2 my-sm-0' style="margin:5px;"><strong>Search</strong></button>
               </form>
               <form class="form-inline">
-                  
                 <div class="btn-group">
                   <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Menu
@@ -28,12 +26,21 @@
               </form>
             </nav>
         </div>
-        <div>
-          <h5 style="text-align:center;">ITEMS: </h5>
-          <ul>
-            <% if(typeof data != 'undefined' && data) { %>
-                    <img src='data:image/png;base64, <%=data%> '/>
-            <% } %>
-          </ul>
+        
+        <div class="jumbotron">
+          <h4 style="text-align:center;">Items for sale!</h4>
+          <div class="flex-container">
+            <% results.forEach(function(t) { %> 
+              <div class="img-thumbnail flex-item">
+                <img  src='data:image/png;base64,<%=t.data%>'  >
+                <h4>Seller: <%=t.username%></h4>
+                <h4><%=t.itemName%></h4>
+                <h4>Description: <%=t.description%></h4>
+                <h4>Cost: <%=t.cost%></h4>
+                <h5>Date Posted: <%=t.purchaseDate%></h5>
+              </div>
+            <% }) %>
+              
+          </div>  
         </div>
 <%- include('templates/footer') -%>
