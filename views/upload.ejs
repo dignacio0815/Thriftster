@@ -2,13 +2,12 @@
     <div class="profileContainer">
             <nav class="navbar navbar-dark bg-dark justify-content-between">
               <a class="navbar-brand" href="/">
-                  <img src="csumblogo.jpg" style ="float:left" width="50" height="50" class="d-inline-block align-top" alt="">
                   <h2 id="name">Thrifster</h2>
               </a>
-                  <form action="/search" class="form-inline">
-                    <input name="search" id="searchBar" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" style="margin:5px;" type="submit"></strong>Search</strong></button>
-                  </form>
+              <form action="/searchResults">
+                <input name="searchedItem" id="searchBar" class="form-control mr-sm-2" type="text" placeholder="Search either by tags, date, and price!" aria-label="Search" required>
+                <button class='btn btn-outline-success my-2 my-sm-0' style="margin:5px;"><strong>Search</strong></button>
+              </form>
                 <div class="btn-group">
                   <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Menu

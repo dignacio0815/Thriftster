@@ -1,16 +1,13 @@
 <%- include('templates/header') -%>
-        <div class="profileContainer">
+    <div class="profileContainer">
             <nav class="navbar navbar-dark bg-dark justify-content-between">
               <a class="navbar-brand" href="/">
                   <h2 id="name">Thrifster</h2>
               </a>
-              
               <form action="/searchResults">
                 <input name="searchedItem" id="searchBar" class="form-control mr-sm-2" type="text" placeholder="Search either by tags, date, and price!" aria-label="Search" required>
                 <button class='btn btn-outline-success my-2 my-sm-0' style="margin:5px;"><strong>Search</strong></button>
               </form>
-              <form class="form-inline">
-                  
                 <div class="btn-group">
                   <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Menu
@@ -19,20 +16,35 @@
                     <form action="/profile">
                         <button class="dropdown-item" type="submit">Profile</button>
                     </form>
+                    <form action="/upload">
+                        <button class="dropdown-item" type="submit">Upload</button>
+                    </form>
                     <form action="/logout">
                         <button class="dropdown-item" type="submit">Log Out</button>
                     </form>
+                    <form action="/aboutUs">
+                      <button class="dropdown-item" type="submit">Learn More About Us</button>
+                    </form>
                   </div>
                 </div>
-              </form>
             </nav>
-        </div>
-        <div>
-          <h5 style="text-align:center;">ITEMS: </h5>
-          <ul>
-            <% if(typeof data != 'undefined' && data) { %>
-                    <img src='data:image/png;base64, <%=data%> '/>
-            <% } %>
-          </ul>
-        </div>
+            
+            <div class="background">
+                <div class="split left">
+                  <div class="centered">
+                    <img src="img_avatar2.png" alt="Avatar woman">
+                    <h2>Jane Flex</h2>
+                    <p></p>
+                  </div>
+                </div>
+                
+                <div class="split right">
+                  <div class="centered">
+                    <img src="img_avatar.png" alt="Avatar man">
+                    <h2>John Doe</h2>
+                    <p>Some text here too.</p>
+                  </div>
+                </div>
+            </div>
+            
 <%- include('templates/footer') -%>

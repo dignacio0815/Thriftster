@@ -208,27 +208,28 @@ app.post("/upload", upload.single('filename'), function(req, res) {
 
 });
 
-app.get("/search", isAuthenticated, function(req, res) {
+app.get("/search", function(req, res) {
     res.render("search");
     // res.render("search");
 }); // route for searching item
 
-app.get("/searchResults", isAuthenticated, function(req, res) {
+app.get("/searchResults", function(req, res) {
     // set up route for choosing items to buy
     // query by item tags
     console.log(req.query.searchedItem)
     let stmt = 'SELECT * FROM POSTS WHERE itemName LIKE ? OR description LIKE ? OR purchaseDate <= ?;';
     connection.query(stmt, ['%' + req.query.searchedItem + '%', '%' + req.query.searchedItem + '%', req.query.searchedItem], function(error, results) {
-        // console.log(req.params.id);
         if (error) throw error;
         if (results.length) {
-            results.forEach(function(t) {
-                console.log(t.itemName)
-            })
+            console.log(results)
             res.render("searchResults", { results: results });
         }
     });
 }); // route for selecting an item // route for selecting an item
+
+app.get("/aboutUs", isAuthenticated, function(req, res) {
+    res.render("aboutUs");
+});
 
 app.get("*", function(req, res) {
     res.render("error");
